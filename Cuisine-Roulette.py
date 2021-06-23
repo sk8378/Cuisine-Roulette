@@ -57,8 +57,9 @@ SEARCH_PATH = '/v3/businesses/search'
 BUSINESS_PATH = '/v3/businesses/'  # Business ID will come after slash.
 
 Address = input("Please input your address: ")
-Price = input("Please input price limits ($-$$$$)")
-Rating = input("Please input minimum rating")
+Price = input("Please input price limits ($-$$$$):")
+
+price_num = str(len(Price))
 
 Cuisine_Names = []
 while True:
@@ -69,13 +70,6 @@ while True:
         Cuisine_Names.append(Cuisine_Name)
 
 
-#for Cuisine_Name1 in Cuisine_Names:
-#   matching_cuisine = [p for p in Cuisine_Names]
-#  matching_cuisine = matching_cuisine[0]
-#    Selected_Cuisine.append(matching_cuisine)
-
-
-
 
 valid_options = Cuisine_Names
 random_choice = random.choice(valid_options)
@@ -84,6 +78,7 @@ random_choice = random.choice(valid_options)
 Cuisine_Name = random_choice
 
 SEARCH_LIMIT = 3
+sort_by = 'rating'
 
 def request(HOST, SEARCH_PATH, API_KEY, url_params=None):
     """Given your API_KEY, send a GET request to the API.
@@ -110,7 +105,7 @@ def request(HOST, SEARCH_PATH, API_KEY, url_params=None):
     return response.json()
 
 
-def search(API_KEY, Cuisine_Name, Address):
+def search(API_KEY, Cuisine_Name, Address, price_num, sort_by):
     """Query the Search API by a search term and location.
     Args:
         term (str): The search term passed to the API.
@@ -122,7 +117,10 @@ def search(API_KEY, Cuisine_Name, Address):
     url_params = {
         'term': Cuisine_Name.replace(' ', '+'),
         'location': Address.replace(' ', '+'),
+        'price': price_num.replace(' ', '+'),
+        'sort by': sort_by,
         'limit': SEARCH_LIMIT
+
     }
     return request(HOST, SEARCH_PATH, API_KEY, url_params=url_params)
 
@@ -141,18 +139,18 @@ def get_business(API_KEY, business_id):
 
 
 
-def query_api(Cuisine_Name, Address):
+def query_api(Cuisine_Name, Address, price_num, sort_by):
     """Queries the API by the input values from the user.
     Args:
         term (str): The search term to query.
         location (str): The location of the business to query.
     """
-    response = search(API_KEY, Cuisine_Name, Address)
+    response = search(API_KEY, Cuisine_Name, Address, price_num, sort_by)
 
     businesses = response.get('businesses')
 
     if not businesses:
-        print(u'No businesses for {0} in {1} found.'.format(Cuisine_Name, Address))
+        print(u'No businesses for {0} in {1} found.'.format(Cuisine_Name, Address, price_num, sort_by))
         return
 
     business_id = businesses[0]['id']
@@ -186,11 +184,17 @@ def main():
     parser.add_argument('-l', '--location', dest='location',
                         default=Address, type=str,
                         help='Search location (default: %(default)s)')
+    parser.add_argument('-p', '--price', dest='price',
+                        default=price_num, type=str,
+                        help='Search price (default: %(default)s)')
+    parser.add_argument('-s', '--sort_by', dest='sort_by',
+                        default=sort_by, type=str,
+                        help='Search sort_by (default: %(default)s)')
 
     input_values = parser.parse_args()
 
     try:
-        query_api(input_values.term, input_values.location)
+        query_api(input_values.term, input_values.location, input_values.price, input_values.sort_by)
     except HTTPError as error:
         sys.exit(
             'Encountered HTTP error {0} on {1}:\n {2}\nAbort program.'.format(
