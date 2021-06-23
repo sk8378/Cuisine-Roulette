@@ -56,6 +56,10 @@ HOST = 'https://api.yelp.com'
 SEARCH_PATH = '/v3/businesses/search'
 BUSINESS_PATH = '/v3/businesses/'  # Business ID will come after slash.
 
+Address = input("Please input your address: ")
+Price = input("Please input price limits ($-$$$$)")
+Rating = input("Please input minimum rating")
+
 Cuisine_Names = []
 while True:
     Cuisine_Name = input("Please input a Cuisine type, or 'DONE' if your whole party has voted: ")
@@ -78,7 +82,7 @@ random_choice = random.choice(valid_options)
 
 
 Cuisine_Name = random_choice
-Address = input("Please input your address: ")
+
 SEARCH_LIMIT = 3
 
 def request(HOST, SEARCH_PATH, API_KEY, url_params=None):
