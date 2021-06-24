@@ -69,9 +69,14 @@ while True:
     else:
         Cuisine_Names.append(Cuisine_Name)
 
+        print(Cuisine_name)
+
 
 
 valid_options = Cuisine_Names
+
+print(valid_options) 
+
 random_choice = random.choice(valid_options)
 
 
@@ -173,6 +178,18 @@ def query_api(Cuisine_Name, Address, price_num, sort_by):
     response = get_business(API_KEY, business_id2)
 
     print(u'Result for business "{0}" found:'.format(business_id2))
+    pprint.pprint(response, indent=2)
+
+    business_id3 = businesses[2]['id']
+
+    print()
+    print()
+    print(u'{0} businesses found, querying business info ' \
+        'for the third result "{1}" ...'.format(
+            len(businesses), business_id3))
+    response = get_business(API_KEY, business_id3)
+
+    print(u'Result for business "{0}" found:'.format(business_id3))
     pprint.pprint(response, indent=2)
 
 
