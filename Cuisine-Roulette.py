@@ -46,10 +46,14 @@ load_dotenv() # get env files from .env file
 
 USER_NAME = os.getenv("USER_NAME")
 API_KEY = os.getenv("API_KEY")
-
+print('------------------------------------------')
+print()
 print("Hello " + USER_NAME + ", welcome to Cuisine Roulette!")
 print("We'll find you a restaurant based on your desired cuisine and location!")
 print()
+print('------------------------------------------')
+print()
+
 
 # API constants, you shouldn't have to change these.
 HOST = 'https://api.yelp.com'
@@ -57,9 +61,18 @@ SEARCH_PATH = '/v3/businesses/search'
 BUSINESS_PATH = '/v3/businesses/'  # Business ID will come after slash.
 
 Address = input("Please input your address: ")
+print()
 Price = input("Please input price limits ($-$$$$):")
 
+print('------------------------------------------')
+print()
+
 price_num = str(len(Price))
+print()
+print('Is everyone in your party ready to chose a cuisine?')
+print()
+
+
 
 Cuisine_Names = []
 while True:
@@ -69,18 +82,22 @@ while True:
     else:
         Cuisine_Names.append(Cuisine_Name)
 
-        print(Cuisine_Names)
 
 
 
-valid_options = Cuisine_Names
 
-print(valid_options) 
 
-random_choice = random.choice(valid_options)
 
+
+random_choice = random.choice(Cuisine_Names)
 
 Cuisine_Name = random_choice
+
+print('------------------------------------------')
+print()
+print('Cuisine Selected: ' + Cuisine_Name)
+print()
+print('------------------------------------------')
 
 SEARCH_LIMIT = 3
 sort_by = 'rating'
@@ -160,37 +177,46 @@ def query_api(Cuisine_Name, Address, price_num, sort_by):
 
     business_id = businesses[0]['id']
 
-    print(u'{0} businesses found, querying business info ' \
-        'for the top result "{1}" ...'.format(
-            len(businesses), business_id))
     response = get_business(API_KEY, business_id)
 
-    print(u'Result for business "{0}" found:'.format(business_id))
+    print()
+    print('------------------------------------------')
+    print()
+
+    print('Restaurant Choice 1:  ...'.format(business_id))
     pprint.pprint(response, indent=2)
     
     business_id2 = businesses[1]['id']
 
     print()
     print()
-    print(u'{0} businesses found, querying business info ' \
-        'for the second result "{1}" ...'.format(
-            len(businesses), business_id2))
+
     response = get_business(API_KEY, business_id2)
 
-    print(u'Result for business "{0}" found:'.format(business_id2))
+    print()
+    print('------------------------------------------')
+    print()
+
+    print('Restaurant Choice 2:  ...'.format(business_id2))
     pprint.pprint(response, indent=2)
 
     business_id3 = businesses[2]['id']
 
     print()
     print()
-    print(u'{0} businesses found, querying business info ' \
-        'for the third result "{1}" ...'.format(
-            len(businesses), business_id3))
+
     response = get_business(API_KEY, business_id3)
 
-    print(u'Result for business "{0}" found:'.format(business_id3))
+    print()
+    print('------------------------------------------')
+    print()
+
+    print('Restaurant Choice 3:  ...'.format(business_id3))
     pprint.pprint(response, indent=2)
+
+    print()
+    print('------------------------------------------')
+    print()
 
 
 def main():
