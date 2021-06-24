@@ -69,7 +69,7 @@ while True:
     else:
         Cuisine_Names.append(Cuisine_Name)
 
-        print(Cuisine_name)
+        print(Cuisine_Names)
 
 
 
