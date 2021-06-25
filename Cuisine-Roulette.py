@@ -62,14 +62,14 @@ BUSINESS_PATH = '/v3/businesses/'  # Business ID will come after slash.
 
 Address = input("Please input your address: ")
 print()
-Price = input("Please input price limits ($-$$$$):")
+Price = input("Please input price limits ($-$$$$): ")
 
 print('------------------------------------------')
 print()
 
 price_num = str(len(Price))
 print()
-print('Is everyone in your party ready to chose a cuisine?')
+print('Is everyone in your party ready to choose a cuisine?')
 print()
 
 
@@ -120,7 +120,6 @@ def request(HOST, SEARCH_PATH, API_KEY, url_params=None):
         'Authorization': 'Bearer %s' % API_KEY,
     }
 
-    print(u'Querying {0} ...'.format(url))
 
     response = requests.request('GET', url, headers=headers, params=url_params)
 
@@ -172,7 +171,7 @@ def query_api(Cuisine_Name, Address, price_num, sort_by):
     businesses = response.get('businesses')
 
     if not businesses:
-        print(u'No businesses for {0} in {1} found.'.format(Cuisine_Name, Address, price_num, sort_by))
+        print('No Restaurants')
         return
 
     business_id = businesses[0]['id']
@@ -183,10 +182,21 @@ def query_api(Cuisine_Name, Address, price_num, sort_by):
     print('------------------------------------------')
     print()
 
-    print('Restaurant Choice 1:  ...'.format(business_id))
-    pprint.pprint(response, indent=2)
+    #print('Restaurant Choice 1:  ...'.format(business_id))
+
+    #pprint.pprint(response, indent=2)
+  
+    print("\nName: ", response['name'])
+    print("\nDisplay_address: ", response['location']['display_address'])
+    print("\nPhone: ", response['phone'])
+    print("\nRating: ", response['name'])
+    print("\nUrl: ", response['url'])
     
     business_id2 = businesses[1]['id']
+
+  
+
+
 
     print()
     print()
@@ -197,8 +207,14 @@ def query_api(Cuisine_Name, Address, price_num, sort_by):
     print('------------------------------------------')
     print()
 
-    print('Restaurant Choice 2:  ...'.format(business_id2))
-    pprint.pprint(response, indent=2)
+    #print('Restaurant Choice 2:  ...'.format(business_id2))
+    #pprint.pprint(response, indent=2)
+
+    print("\nName: ", response['name'])
+    print("\nDisplay_address: ", response['location']['display_address'])
+    print("\nPhone: ", response['phone'])
+    print("\nRating: ", response['name'])
+    print("\nUrl: ", response['url'])
 
     business_id3 = businesses[2]['id']
 
@@ -211,9 +227,14 @@ def query_api(Cuisine_Name, Address, price_num, sort_by):
     print('------------------------------------------')
     print()
 
-    print('Restaurant Choice 3:  ...'.format(business_id3))
-    pprint.pprint(response, indent=2)
-
+    #print('Restaurant Choice 3:  ...'.format(business_id3))
+    #pprint.pprint(response, indent=2)
+    
+    print("\nName: ", response['name'])
+    print("\nDisplay_address: ", response['location']['display_address'])
+    print("\nPhone: ", response['phone'])
+    print("\nRating: ", response['name'])
+    print("\nUrl: ", response['url'])
     print()
     print('------------------------------------------')
     print()
