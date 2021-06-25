@@ -189,7 +189,7 @@ def query_api(Cuisine_Name, Address, price_num, sort_by):
     print("\nName: ", response['name'])
     print("\nDisplay_address: ", response['location']['display_address'])
     print("\nPhone: ", response['phone'])
-    print("\nRating: ", response['name'])
+    print("\nRating: ", response['rating'])
     print("\nUrl: ", response['url'])
     
     business_id2 = businesses[1]['id']
@@ -213,7 +213,7 @@ def query_api(Cuisine_Name, Address, price_num, sort_by):
     print("\nName: ", response['name'])
     print("\nDisplay_address: ", response['location']['display_address'])
     print("\nPhone: ", response['phone'])
-    print("\nRating: ", response['name'])
+    print("\nRating: ", response['rating'])
     print("\nUrl: ", response['url'])
 
     business_id3 = businesses[2]['id']
@@ -229,11 +229,11 @@ def query_api(Cuisine_Name, Address, price_num, sort_by):
 
     #print('Restaurant Choice 3:  ...'.format(business_id3))
     #pprint.pprint(response, indent=2)
-    
+
     print("\nName: ", response['name'])
     print("\nDisplay_address: ", response['location']['display_address'])
     print("\nPhone: ", response['phone'])
-    print("\nRating: ", response['name'])
+    print("\nRating: ", response['rating'])
     print("\nUrl: ", response['url'])
     print()
     print('------------------------------------------')
